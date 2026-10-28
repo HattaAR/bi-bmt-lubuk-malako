@@ -1,0 +1,10 @@
+streamlit==1.66.1
+pandas
+numpy
+plotly
+openpyxl
+xlrd
+joblib
+argon2-cffi==25.1.0
+PyMySQL[rsa]
+python-dotenv

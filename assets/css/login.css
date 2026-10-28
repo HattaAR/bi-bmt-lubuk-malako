@@ -1,0 +1,352 @@
+/* Referensi desain UI: scoped login composition; no dashboard/admin overrides. */
+@font-face {
+  font-family: BmtInter;
+  src: url("__INTER_FONT__") format("woff2");
+  font-weight: 400 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: BmtJakarta;
+  src: url("__JAKARTA_FONT__") format("woff2");
+  font-weight: 400 800;
+  font-display: swap;
+}
+body:has(.st-key-bmt_login) {
+  /* Primitives from DESIGN.md, followed by semantic and component aliases. */
+  --bmt-white: #FFFFFF;
+  --bmt-slate-50: #F8FAFC;
+  --bmt-slate-200: #E2E8F0;
+  --bmt-slate-500: #64748B;
+  --bmt-slate-800: #1E293B;
+  --bmt-forest: #1F4E24;
+  --bmt-forest-hover: #285429;
+  --bmt-teal: #0F766E;
+  --bmt-amber: #F59E0B;
+  --bmt-orange: #F97316;
+  --bmt-red: #DC2626;
+  --bmt-error-text: #B91C1C;
+  --bmt-error-surface: #FEF2F2;
+  --login-surface: var(--bmt-white);
+  --login-text: var(--bmt-slate-800);
+  --login-muted: var(--bmt-slate-500);
+  --login-border: var(--bmt-slate-200);
+  --login-accent: var(--bmt-forest);
+  --login-button-bg: var(--login-accent);
+  --login-input-border: #D5DFD8;
+  --login-input-surface: #FBFCFB;
+  --login-radius-control: 12px;
+  --login-radius-card: 16px;
+  --login-card-shadow: 0 2px 5px #0627140d, 0 16px 36px #06271426;
+  --login-button-shadow: 0 4px 12px #1f4e2424;
+  --login-input-focus: var(--bmt-teal);
+  --login-panel-height: max(660px, calc(100dvh - 64px));
+  --login-font: BmtInter, "Segoe UI", Arial, sans-serif;
+  --login-heading-font: BmtJakarta, "Segoe UI", Arial, sans-serif;
+}
+body:has(.st-key-bmt_login) [data-testid="stAppViewContainer"],
+body:has(.st-key-bmt_login) [data-testid="stMain"] {
+  background: var(--bmt-slate-50);
+}
+body:has(.st-key-bmt_login) [data-testid="stHeader"] { display: none; }
+body:has(.st-key-bmt_login) :is([data-testid="stSidebar"],[data-testid="stSidebarCollapsedControl"],button[aria-label="Collapse sidebar"],button[aria-label="Expand sidebar"]) { display:none!important; }
+body:has(.st-key-bmt_login) [data-testid="stMain"] { margin-left:0!important; width:100%!important; max-width:100%; flex-basis:100%; }
+body:has(.st-key-bmt_login) [data-testid="stMainBlockContainer"] {
+  padding: 20px;
+  max-width: none;
+}
+.st-key-bmt_login, .st-key-bmt_login * { box-sizing: border-box; }
+.st-key-bmt_login {
+  padding: 10px;
+  min-height: calc(100dvh - 40px);
+  border: 1px solid var(--login-border);
+  border-radius: 24px;
+  background: var(--login-surface);
+  box-shadow: 0 8px 40px #1e293b08;
+  font-family: var(--login-font);
+  color: var(--login-text);
+}
+.st-key-bmt_login :is(p, label, input, button) { font-family: var(--login-font); }
+.st-key-bmt_login_left {
+  min-height: var(--login-panel-height);
+  padding: 26px 32px 20px;
+  border: 1px solid var(--login-border);
+  border-radius: 16px;
+  background: var(--login-surface);
+  gap: 0;
+}
+.bmt-login-brand { display: flex; align-items: center; gap: 14px; }
+.bmt-login-brand img { object-fit: contain; flex-shrink: 0; width: 48px; height: 48px; }
+.bmt-login-brand strong { display: block; font-size: 16px; font-weight: 650; line-height: 1.5; letter-spacing: -0.25px; }
+.st-key-bmt_login_form_wrap { max-width: 380px; width: 100%; height: fit-content; flex: none; margin: auto; align-self: center; gap: 0; }
+.st-key-bmt_login_left > [data-testid="stLayoutWrapper"]:has(.st-key-bmt_login_form_wrap) {
+  flex: 1 1 auto; align-items: center; justify-content: center;
+}
+.st-key-bmt_login_form_wrap h1 {
+  font-family: var(--login-heading-font);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.9px;
+  color: var(--login-accent);
+  padding: 0 0 12px;
+}
+.st-key-bmt_login_form_wrap [data-testid="stCaptionContainer"],
+.st-key-bmt_login_form_wrap [data-testid="stCaptionContainer"] p {
+  color: var(--login-muted); font-size: 14px; line-height: 1.65;
+}
+.st-key-bmt_login_form_wrap [data-testid="stCaptionContainer"] { opacity: 1; }
+.st-key-bmt_login_form_wrap [data-testid="stForm"] { border: 0; padding: 20px 0 0; }
+.st-key-bmt_login_form_wrap [data-testid="stTextInput"] label p {
+  font-size: 13px; font-weight: 600; color: var(--login-text);
+}
+.st-key-bmt_login_form_wrap [data-testid="stTextInputRootElement"] {
+  height: 52px;
+  min-height: 52px;
+  border: 1px solid var(--login-input-border);
+  border-radius: var(--login-radius-control);
+  background: var(--login-input-surface);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.st-key-bmt_login_form_wrap input {
+  color: var(--login-text); background: var(--login-input-surface); font-size: 14px; min-height: 50px;
+}
+.st-key-bmt_login_form_wrap input::placeholder { color: var(--login-muted); opacity: 1; }
+.st-key-bmt_login_form_wrap [data-testid="stTextInputRootElement"]:focus-within {
+  border-color: var(--login-input-focus);
+  box-shadow: 0 0 0 3px #0f766e33;
+}
+.st-key-bmt_login_form_wrap [data-testid="stFormSubmitButton"] { padding-top: 8px; }
+.st-key-bmt_login_form_wrap [data-testid="stFormSubmitButton"] button {
+  min-height: 52px;
+  color: var(--bmt-white);
+  background: var(--login-button-bg);
+  border: 1px solid var(--login-button-bg);
+  border-radius: var(--login-radius-control);
+  font-weight: 600;
+  box-shadow: var(--login-button-shadow);
+  transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+.st-key-bmt_login_form_wrap [data-testid="stFormSubmitButton"] button:hover {
+  background: var(--bmt-forest-hover); border-color: var(--bmt-forest-hover);
+  transform: translateY(-1px);
+}
+.st-key-bmt_login_form_wrap button:focus-visible {
+  outline: 3px solid var(--login-input-focus); outline-offset: 3px;
+}
+.st-key-bmt_login_feedback { min-height: 100px; padding-top: 12px; }
+.st-key-bmt_login_feedback [data-testid="stAlert"] { padding: 10px 12px; border-radius: 9px; }
+.st-key-bmt_login_feedback [data-testid="stAlert"] p { font-size: 12px; line-height: 1.5; }
+.st-key-bmt_login_feedback [role="alert"] { color: var(--bmt-error-text); background: var(--bmt-error-surface); }
+.st-key-bmt_login_feedback [role="alert"] p { color: var(--bmt-error-text); }
+.st-key-bmt_login_help p { font-size: 12px; line-height: 1.6; color: var(--login-muted); }
+.st-key-bmt_login_right { gap: 0; min-height: var(--login-panel-height); }
+.bmt-login-showcase {
+  height: var(--login-panel-height);
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 12% 8%, #719c6338, transparent 62%),
+              radial-gradient(ellipse at 90% 85%, #0f766e24, transparent 52%),
+              linear-gradient(145deg, #244f30, #153f27 62%, #10351f);
+  color: var(--bmt-white);
+}
+.bmt-login-grid {
+  position: absolute; inset: 0; z-index: -1;
+  background-image: linear-gradient(#ffffff06 1px, transparent 1px), linear-gradient(90deg, #ffffff06 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+.bmt-login-artwork { position: relative; width: min(520px, calc(100% - 64px)); height: 450px; margin: 56px auto 0; }
+.bmt-login-chart {
+  position: absolute; width: 350px; padding: 15px 17px;
+  background: var(--login-surface); color: var(--login-text);
+  border: 1px solid #e4ebe4; border-radius: var(--login-radius-card);
+  box-shadow: var(--login-card-shadow);
+}
+.bmt-login-chart h3 {
+  margin: 0 0 12px; padding: 0;
+  font-family: var(--login-heading-font); font-size: 12px; font-weight: 700; line-height: 1.4; color: var(--login-accent);
+}
+.bmt-login-composition { top: 0; left: 0; height: 160px; }
+.bmt-login-bars { height: 87px; }
+.bmt-composition-row { margin-bottom: 10px; }
+.bmt-composition-row > span { display: block; margin-bottom: 6px; font-size: 10px; color: #475569; }
+.bmt-stacked-bar { display: flex; height: 13px; overflow: hidden; border-radius: 4px; }
+.bmt-stacked-bar i:nth-child(1) { flex: 248; }
+.bmt-stacked-bar i:nth-child(2) { flex: 34; }
+.bmt-stacked-bar i:nth-child(3) { flex: 22; }
+.bmt-stacked-bar i:nth-child(4) { flex: 16; }
+.bmt-stacked-outstanding i:nth-child(1) { flex: 262; }
+.bmt-stacked-outstanding i:nth-child(2) { flex: 27; }
+.bmt-stacked-outstanding i:nth-child(3) { flex: 18; }
+.bmt-stacked-outstanding i:nth-child(4) { flex: 13; }
+.bmt-login-legend { display: flex; justify-content: flex-end; gap: 12px; margin-top: 4px; font-size: 10px; color: var(--login-muted); }
+.bmt-login-legend span { display: flex; align-items: center; gap: 4px; }
+.bmt-login-legend i { width: 6px; height: 6px; border-radius: 50%; }
+.bmt-category-l { fill: #2D7A39; background: #2D7A39; }
+.bmt-category-kl { fill: var(--bmt-amber); background: var(--bmt-amber); }
+.bmt-category-d { fill: var(--bmt-orange); background: var(--bmt-orange); }
+.bmt-category-m { fill: var(--bmt-red); background: var(--bmt-red); }
+.bmt-login-sectors { top: 152px; right: 0; width: 360px; height: 166px; }
+.bmt-login-treemap { display: grid; grid-template-columns: 1.2fr 0.65fr 0.5fr; grid-template-rows: 2fr 0.65fr; gap: 3px; height: 111px; }
+.bmt-login-treemap > div { border-radius: 4px; padding: 10px; color: var(--bmt-white); font-size: 10px; font-weight: 500; }
+.bmt-sector-farming { grid-row: 1 / 3; background: var(--login-accent); }
+.bmt-sector-trade { grid-column: 2 / 4; background: var(--bmt-teal); }
+.bmt-login-treemap .bmt-sector-services { background: #496E83; padding: 7px; }
+.bmt-login-treemap .bmt-sector-other { background: #5D735A; padding: 7px; }
+.bmt-login-duration { top: 310px; left: 12px; width: 350px; height: 166px; }
+.bmt-login-duration h3 { font-size: 12px; margin-bottom: 6px; }
+.bmt-duration-chart { height: 114px; }
+.bmt-duration-plot { display: grid; grid-template-columns: repeat(4,1fr); align-items: end; height: 93px; border-bottom: 1px solid var(--login-border); background: repeating-linear-gradient(to top, transparent, transparent 25px, #edf2f3 26px, transparent 27px); }
+.bmt-duration-plot i { width: 44px; justify-self: center; background: var(--bmt-teal); border-radius: 4px 4px 0 0; }
+.bmt-duration-plot i:nth-child(1) { height: 78px; }
+.bmt-duration-plot i:nth-child(2) { height: 53px; }
+.bmt-duration-plot i:nth-child(3) { height: 31px; }
+.bmt-duration-plot i:nth-child(4) { height: 18px; }
+.bmt-duration-labels { display: grid; grid-template-columns: repeat(4,1fr); padding-top: 7px; font-size: 9px; text-align: center; color: #475569; }
+@media (min-height: 850px) and (min-width: 981px) {
+  .bmt-login-artwork { margin-top: 85px; }
+}
+@media (max-width: 1100px) and (min-width: 981px) {
+  .bmt-login-chart { width: 80%; }
+  .bmt-login-sectors { width: 84%; }
+  .st-key-bmt_login_left { padding-inline: 24px; }
+}
+@media (max-width: 980px) {
+  body:has(.st-key-bmt_login) [data-testid="stMainBlockContainer"] { padding: 16px; }
+  .st-key-bmt_login { min-height: calc(100dvh - 32px); padding: 8px; border-radius: 20px; }
+  .st-key-bmt_login [data-testid="stColumn"]:has(.st-key-bmt_login_right) { display: none; }
+  .st-key-bmt_login [data-testid="stColumn"]:has(.st-key-bmt_login_left) { width: 100%; flex: 1 1 100%; }
+  .st-key-bmt_login_left { min-height: max(660px, calc(100dvh - 52px)); padding: 24px; }
+  .st-key-bmt_login_form_wrap h1 { font-size: 29px; }
+  .st-key-bmt_login_form_wrap input { font-size: 16px; }
+  .bmt-login-footer { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .st-key-bmt_login * { transition: none !important; animation: none !important; }
+}
+
+/* Revisi referensi desain UI: bidang penuh tanpa bingkai halaman. */
+body:has(.st-key-bmt_login) { --login-panel-height: max(660px, 100dvh); }
+body:has(.st-key-bmt_login) [data-testid="stMainBlockContainer"] { padding: 0; max-width: none; }
+.st-key-bmt_login { padding: 0; min-height: 100dvh; border: 0; border-radius: 0; box-shadow: none; }
+.st-key-bmt_login_left { min-height: var(--login-panel-height); border: 0; border-radius: 0; padding: 40px 48px; }
+.st-key-bmt_login_form_wrap { transform: none; }
+.st-key-bmt_login_right { min-height: var(--login-panel-height); }
+.bmt-login-showcase { height: var(--login-panel-height); border-radius: 0; display: flex; align-items: center; justify-content: center; }
+.bmt-login-artwork { width: min(520px, calc(100% - 64px)); height: 540px; margin: 0; flex-shrink: 0; }
+.bmt-login-sectors { top: 152px; height: 230px; }
+.bmt-login-duration { top: 374px; }
+.bmt-login-treemap { display: grid; grid-template-columns: 59.35fr 40.66fr; grid-template-rows: 1fr; height: 140px; gap: 0; overflow: hidden; border-radius: 4px; }
+.bmt-login-treemap > div { padding: 0; border-radius: 0; }
+.bmt-sector-farming { grid-row: auto; display: flex; flex-direction: column; justify-content: space-between; padding: 10px !important; }
+.bmt-sector-right { display: grid; grid-template-rows: 35.61fr 5.05fr; min-width: 0; }
+.bmt-sector-trade { grid-column: auto; display: flex; flex-direction: column; justify-content: space-between; padding: 10px; }
+.bmt-login-treemap strong { font-size: 21px; line-height: 1.2; font-weight: 750; }
+.bmt-sector-small { display: grid; grid-template-columns: 2.97fr 2.08fr; }
+.bmt-sector-small-labels { display: flex; justify-content: flex-end; gap: 16px; font-size: 10px; margin-top: 9px; color: var(--login-text); }
+.bmt-sector-small-labels span::before { content: ''; display: inline-block; width: 7px; height: 7px; margin-right: 4px; border-radius: 2px; background: #496E83; }
+.bmt-sector-small-labels span:last-child::before { background: #5D735A; }
+@media (max-width: 980px) {
+  .st-key-bmt_login { padding: 0; min-height: 100dvh; border-radius: 0; }
+  .st-key-bmt_login_left { padding: 28px 24px; min-height: max(660px,100dvh); }
+}
+
+/* Referensi desain UI: satu bidang dengan lengkung halus, tanpa bingkai tambahan. */
+.st-key-bmt_login { border-radius: 32px 0 0 32px; overflow: hidden; }
+.st-key-bmt_login_left { border-radius: 32px 0 0 32px; }
+.bmt-login-showcase { border-radius: 32px 0 0 32px; flex-direction: column; gap: 28px; }
+.bmt-login-account-help {
+  margin: 16px 0 0; color: var(--login-muted); text-align: center;
+  font-family: var(--login-font); font-size: 12px; line-height: 1.6;
+}
+.bmt-login-summary {
+  flex-shrink: 0; max-width: 420px; margin: 0 32px;
+  color: var(--bmt-white); font-family: var(--login-font);
+  font-size: 16px; font-weight: 500; line-height: 1.65; text-align: center;
+}
+@media (max-width: 980px) { .st-key-bmt_login { border-radius: 28px; } }
+
+/* Component states remain local to login; charts intentionally have no hover action. */
+.st-key-bmt_login_form_wrap [data-testid="stFormSubmitButton"] button:active {
+  transform: translateY(0); box-shadow: none;
+}
+@media (max-width: 980px) {
+  .bmt-login-brand { gap: 12px; }
+  .bmt-login-brand strong { font-size: 15px; }
+  .st-key-bmt_login_form_wrap h1 { font-size: 28px; letter-spacing: -0.7px; }
+  .st-key-bmt_login_left { border-radius: 28px; }
+}
+
+/* Referensi desain UI: ambient analytics, with decorative details only. */
+.st-key-bmt_login_left { padding-inline: 32px; padding-bottom: 28px; }
+.st-key-bmt_login .bmt-login-panel-footer {
+  display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap; gap: 8px 16px; margin-top: 24px;
+  color: var(--login-muted); font-family: var(--login-font);
+  font-size: 12px; font-weight: 400; line-height: 1.5;
+}
+@media (max-width: 980px) {
+  .st-key-bmt_login_left { padding-inline: 24px; padding-bottom: 24px; }
+}
+.st-key-bmt_login .bmt-login-intro {
+  margin-top: 8px; padding: 16px 0 0;
+  border-top: 1px solid var(--login-border);
+}
+.st-key-bmt_login .bmt-login-intro-title {
+  margin: 0 0 6px; color: var(--login-accent);
+  font-family: var(--login-heading-font); font-size: 14px;
+  font-weight: 650; line-height: 1.5;
+}
+.st-key-bmt_login .bmt-login-intro-copy {
+  margin: 0; color: var(--login-muted);
+  font-size: 13px; line-height: 1.7;
+}
+body:has(.st-key-bmt_login) {
+  --login-orbit-line: #c7ebd21a;
+  --login-orbit-glow: #9ed8b219;
+  --login-icon-surface: #edf5ee;
+}
+.bmt-login-atmosphere {
+  position: absolute; inset: 0; z-index: -1;
+  overflow: hidden; pointer-events: none;
+  background: radial-gradient(ellipse at 45% 42%, var(--login-orbit-glow), transparent 65%);
+}
+.bmt-login-orbit, .bmt-login-orbit-core {
+  position: absolute; left: 50%; top: 46%;
+  width: 640px; height: 640px; border-radius: 50%;
+  border: 1px solid var(--login-orbit-line);
+  transform: translate(-50%, -50%);
+}
+.bmt-login-orbit { box-shadow: 0 0 0 72px #c7ebd206, 0 0 0 144px #c7ebd204; }
+.bmt-login-orbit-core { width: 470px; height: 470px; border-style: dashed; opacity: 0.6; }
+.bmt-login-light-point {
+  position: absolute; width: 6px; height: 6px; left: 12%; top: 65%;
+  border-radius: 50%; background: #bbdec8;
+  box-shadow: 0 0 18px 4px #b7e4c329;
+}
+.st-key-bmt_login_form_wrap h1::before {
+  content: ''; display: block; width: 32px; height: 4px;
+  margin-bottom: 16px; border-radius: 4px; background: var(--login-accent);
+}
+.bmt-login-chart h3 { position: relative; padding-left: 30px; }
+.bmt-login-chart h3::before {
+  content: ''; position: absolute; left: 0; top: -3px;
+  width: 23px; height: 23px; border-radius: 6px;
+  background-color: var(--login-icon-surface);
+  background-repeat: no-repeat; background-position: center; background-size: 15px;
+}
+.bmt-login-composition h3::before { background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231F4E24%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%207h16M4%2012h11M4%2017h14%22%2F%3E%3C%2Fsvg%3E"); }
+.bmt-login-sectors h3::before { background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231F4E24%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%229%22%20height%3D%2218%22%20rx%3D%221.5%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%223%22%20width%3D%226%22%20height%3D%2210%22%20rx%3D%221.5%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%2216%22%20width%3D%226%22%20height%3D%225%22%20rx%3D%221%22%2F%3E%3C%2Fsvg%3E"); }
+.bmt-login-duration h3::before { background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231F4E24%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020V12M10%2020V5M16%2020V9M22%2020H2%22%2F%3E%3C%2Fsvg%3E"); }
+
+.st-key-bmt_login_form_wrap [data-testid="stFormSubmitButton"] button { position: relative; padding-inline: 44px; }
+.st-key-bmt_login_form_wrap [data-testid="stFormSubmitButton"] button::after {
+  content: ''; position: absolute; right: 18px; width: 18px; height: 18px;
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%2012h14m-6-6%206%206-6%206%22%2F%3E%3C%2Fsvg%3E");
+  pointer-events: none;
+}
+@media (max-width: 980px) {
+  .st-key-bmt_login_form_wrap h1::before { margin-bottom: 12px; width: 28px; }
+}

@@ -1,0 +1,24 @@
+/* Referensi desain UI: same geometry, local loading and paint-only motion. */
+[data-testid="stElementContainer"]:has([data-bmt-runtime]) { display:none; }
+.bmt-motion-sr { position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0; }
+.bmt-motion-composition { position:relative; }
+.bmt-motion-composition::after { content:'';position:absolute;top:0;right:0;bottom:0;width:calc(100% - var(--bmt-composition-progress,100%));background:#f1f5f9;pointer-events:none;border-radius:inherit; }
+.bmt-page-loading { color:#18201a;font-family:BmtExecutiveInter,Inter,sans-serif; }
+.bmt-page-loading header { min-height:74px;margin-bottom:24px; }
+.bmt-loading-breadcrumb { color:#627065;font-size:12px;line-height:16px; }
+.bmt-page-loading h1 { margin:4px 0;padding:0;font:700 24px/32px BmtExecutiveInter,Inter,sans-serif;letter-spacing:-.6px; }
+.bmt-page-loading p { font-size:12px;line-height:18px;margin:0;color:#627065; }
+.bmt-loading-filter { height:52px;border:1px solid #e4eae2;border-radius:12px;background:#fff;margin-bottom:24px; }
+.bmt-loading-cards { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px;margin-bottom:24px; }
+.bmt-loading-cards i,.bmt-loading-chart { display:block;background:#edf1ee;border:1px solid #e4eae2;border-radius:16px; }
+.bmt-loading-cards i { height:210px; }
+.bmt-loading-chart { height:320px; }
+.bmt-page-loading[data-layout=quality] .bmt-loading-cards { grid-template-columns:1fr 2fr; }
+.bmt-page-loading[data-layout=quality] .bmt-loading-cards i { height:430px; }
+.bmt-page-loading[data-layout=quality] .bmt-loading-cards i:last-child { display:none; }
+.bmt-page-loading:is([data-layout=concentration],[data-layout=marketing],[data-layout=historical]) .bmt-loading-cards { grid-template-columns:1fr; }
+.bmt-page-loading:is([data-layout=concentration],[data-layout=marketing],[data-layout=historical]) .bmt-loading-cards i { height:100px; }
+.bmt-page-loading:is([data-layout=concentration],[data-layout=marketing],[data-layout=historical]) .bmt-loading-cards i:not(:first-child) { display:none; }
+.bmt-page-loading[data-layout=simple] .bmt-loading-cards { display:none; }
+@media(max-width:1100px) { .bmt-page-loading[data-layout=quality] .bmt-loading-cards { grid-template-columns:1fr; } }
+@media(prefers-reduced-motion:reduce) { .bmt-page-loading *, .bmt-motion-composition { animation:none!important;transition:none!important; } }

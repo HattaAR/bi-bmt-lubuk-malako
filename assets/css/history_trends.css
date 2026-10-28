@@ -1,0 +1,49 @@
+/* Referensi desain UI Riwayat & Tren; empty analytical state, no fake chart. */
+body:has(.st-key-executive_history_trends_page) { --bmt-canvas:#f8fafc; }
+.st-key-executive_history_trends_page { gap:24px; }
+.st-key-executive_history_trends_page .bmt-page-header h1 { font-size:28px; line-height:36px; }
+.st-key-executive_history_trends_page .bmt-page-header p { font-size:14px; line-height:20px; max-width:450px; }
+.st-key-executive_history_trends_page .bmt-source-badge { white-space:normal; max-width:54%; line-height:20px; }
+.st-key-executive_history_trends_page h2 { font:600 18px/26px BmtExecutiveInter,Inter,sans-serif; color:#1e293b; margin:0; padding:0; }
+.st-key-trend_availability,.st-key-trend_periods,.st-key-trend_panel,.st-key-trend_reports { padding:24px!important; border:1px solid #e2e8f0; border-radius:12px; background:white; box-shadow:0 1px 2px #0000000a; }
+.st-key-trend_availability,.st-key-trend_periods { padding:20px!important; }
+.rt-availability { display:flex; align-items:center; gap:14px; font:400 13px/20px BmtExecutiveInter,Inter,sans-serif; color:#64748b; }
+.rt-availability > div:nth-child(2) { flex:1; }
+.rt-availability h2 { font-size:16px; line-height:24px; }
+.rt-availability p { font-size:13px; line-height:20px; margin:4px 0 0; }
+.rt-document { width:40px; height:40px; display:grid; place-items:center; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; font-size:24px; color:#475569; flex-shrink:0; }
+.rt-badge { display:inline-block; padding:4px 12px; border:1px solid #fcd34d; border-radius:20px; background:#fffbeb; color:#92400e; font-size:12px; line-height:18px; text-align:center; }
+.rt-availability > .rt-badge { flex-shrink:0; }
+.st-key-trend_periods [data-testid=stWidgetLabel] p { font-size:13px; }
+.st-key-trend_periods [role=combobox] { font-size:13px; }
+.rt-period-note,.rt-table-note { border-top:1px solid #e2e8f0; padding-top:12px; margin:0; color:#64748b; font-size:12px; line-height:20px; }
+.rt-table-note { margin-top:16px; }
+.st-key-trend_panel > [data-testid=stLayoutWrapper]:first-child { padding-bottom:16px; border-bottom:1px solid #e2e8f0; }
+.rt-muted { font:400 13px/20px BmtExecutiveInter,Inter,sans-serif; color:#64748b; margin:4px 0 0; }
+.st-key-trend_empty { min-height:280px; padding:24px!important; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; align-items:center; justify-content:center; gap:20px; }
+.rt-empty-copy { text-align:center; font-family:BmtExecutiveInter,Inter,sans-serif; max-width:480px; margin:0 auto; }
+.rt-empty-icon { width:48px; height:48px; display:grid; place-items:center; background:#f1f5f9; border-radius:50%; color:#94a3b8; margin:0 auto 12px; }
+.rt-empty-copy h3 { font-size:16px; line-height:24px; font-weight:600; color:#1e293b; margin:0 0 6px; padding:0; }
+.rt-empty-copy p { font-size:13px; line-height:20px; color:#64748b; margin:0; }
+.st-key-trend_empty [data-testid=stPageLink] a { background:#1f4e24; color:white; border-radius:8px; padding:8px 16px; width:max-content; margin:auto; }
+.st-key-trend_empty [data-testid=stPageLink] a p { color:white; font-size:13px; font-weight:600; }
+.st-key-trend_empty [data-testid=stPageLink] a [data-testid=stIconMaterial] { color:white; }
+.st-key-trend_panel [data-testid=stButtonGroup] { border-radius:8px; padding:4px; gap:2px; background:#f1f5f9; width:fit-content; }
+.st-key-trend_panel [data-testid=stButtonGroup] button { border:0; border-radius:6px; padding:6px 12px; min-height:28px; font-size:12px; line-height:16px; color:#64748b; background:transparent; opacity:1; }
+.st-key-trend_panel [data-testid=stButtonGroup] button[aria-checked=true] { background:white; color:#475569; box-shadow:0 1px 2px #0000000a; }
+.st-key-trend_history_details { gap:24px; }
+.st-key-trend_history_details [data-testid=stExpander] { background:white; border:1px solid #e2e8f0; border-radius:12px; box-shadow:0 1px 2px #0000000a; }
+.st-key-trend_history_details summary { padding:16px 20px; font-size:13px; color:#1e293b; }
+.rt-table-scroll { overflow-x:auto; max-width:100%; margin-top:20px; }
+.rt-table-scroll:focus-visible { outline:3px solid #0f766e; outline-offset:2px; }
+.rt-table-scroll table { width:100%; min-width:760px; border-collapse:collapse; font:400 13px/20px BmtExecutiveInter,Inter,sans-serif; color:#1e293b; }
+.rt-table-scroll :is(td,th) { padding:14px 16px; text-align:left; border-bottom:1px solid #e2e8f0; }
+.rt-table-scroll th { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.4px; color:#64748b; }
+.rt-table-scroll td:last-child,.rt-table-scroll th:last-child { text-align:right; }
+.rt-table-scroll code { white-space:normal; overflow-wrap:anywhere; font-size:12px; color:#334155; }
+.rt-footer { text-align:center; font-size:12px; line-height:20px; color:#64748b; margin:0; }
+@container(max-width:850px) {
+ .rt-availability { flex-wrap:wrap; }
+ .st-key-trend_panel > [data-testid=stLayoutWrapper] > [data-testid=stHorizontalBlock] { flex-direction:column; }
+ .st-key-trend_panel > [data-testid=stLayoutWrapper] > [data-testid=stHorizontalBlock] > [data-testid=stColumn] { width:100%!important; }
+}

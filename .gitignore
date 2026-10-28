@@ -1,0 +1,127 @@
+# ==================================================
+# Kredensial dan konfigurasi lokal
+# ==================================================
+.env
+.env.*
+!.env.example
+
+.streamlit/secrets.toml
+
+tests/executive_visual_config.json
+tests/.*secret*.json
+tests/.*browser-config*.json
+tests/.interaction-excel-before.json
+tests/.reference-tailwind.js
+
+*.pem
+*.key
+*.p12
+*.pfx
+
+
+# ==================================================
+# Virtual environment dan cache Python
+# ==================================================
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+
+# ==================================================
+# Data BMT: mentah, sementara, dan hasil olahan
+# Pertahankan struktur folder dan dokumentasi
+# ==================================================
+data/**
+!data/**/
+!data/**/.gitkeep
+!data/**/README.md
+
+# Lindungi spreadsheet/data meskipun di luar data/
+*.xls
+*.xlsx
+*.xlsm
+*.xlsb
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.arrow
+
+
+# ==================================================
+# Backup database
+# SQL skema/migrasi tidak diabaikan secara keseluruhan
+# ==================================================
+backups/
+database/backups/
+*.sql.gz
+*.sql.zip
+*.dump
+*.bak
+
+# Database lokal berbasis file
+*.sqlite
+*.sqlite3
+*.db
+
+
+# ==================================================
+# Model dan hasil prediksi
+# ==================================================
+models/**
+!models/**/
+!models/**/.gitkeep
+!models/**/README.md
+
+*.pkl
+*.pickle
+*.joblib
+*.onnx
+*.h5
+*.hdf5
+*.pt
+*.pth
+
+
+# ==================================================
+# Screenshot, rekaman, dan hasil pengujian
+# Referensi desain di references/ tetap dapat dilacak
+# ==================================================
+docs/screenshots/
+test-results/
+playwright-report/
+blob-report/
+coverage/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.log
+
+
+# ==================================================
+# Dependensi dan hasil build
+# ==================================================
+node_modules/
+build/
+dist/
+
+
+# ==================================================
+# Berkas sementara editor dan sistem
+# ==================================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+~$*
+*.tmp
+*.temp
+*.swp
+*.swo

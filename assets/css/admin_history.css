@@ -1,0 +1,66 @@
+/* Referensi desain UI riwayat: isolated from upload, executive and login. */
+.st-key-admin_history_page {gap:24px;min-width:0;}
+.st-key-admin_history_page .adm-header h1 {font-size:30px;font-weight:800;}
+.ah-panel,.st-key-ah_filters,.st-key-ah_inventory {background:white;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 1px 2px #0000000d;min-width:0;}
+.ah-panel {padding:20px;}
+.ah-section {display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid #f1f5f9;margin-bottom:14px;}
+.ah-section img {background:#ecfdf5;padding:6px;box-sizing:content-box;border-radius:8px;}
+.ah-section h2 {font-size:14px!important;line-height:20px;margin:0;padding:0;font-weight:600;}
+.ah-section p {font-size:12px;color:#64748b;margin:0;line-height:18px;}
+.ah-current {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.ah-source {padding:14px;border:1px solid #e5e7eb;border-radius:12px;background:#fafbfc;min-width:0;}
+.ah-source.active {border-color:#a7e8d7;background:#f0fdfa80;}
+.ah-source-top {display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;margin-bottom:8px;}
+.ah-source strong {display:block;font-size:14px;line-height:20px;font-weight:600;overflow-wrap:anywhere;}
+.ah-source p {font-size:12px;color:#64748b;margin:4px 0 0;}
+.ah-chip {display:inline-block;padding:2px 8px;border:1px solid #e2e8f0;background:#f1f5f9;color:#475569;border-radius:5px;font-size:11px;line-height:16px;font-weight:500;white-space:nowrap;}
+.ah-chip.active,.ah-chip.published {background:#ecfdf5;border-color:#a7f3d0;color:#047857;}
+.ah-chip.active {background:#059669;color:white;border:0;}
+.ah-chip.warning,.ah-chip.invalid {background:#fffbeb;border-color:#fde68a;color:#92400e;}
+.ah-chip.invalid {background:#fef2f2;border-color:#fecaca;color:#b91c1c;}
+.ah-chip.ready {border-radius:20px;}
+.st-key-ah_filters {padding:12px;gap:12px;}
+.st-key-admin_history_page [data-testid="stHorizontalBlock"] {align-items:center;}
+.st-key-ah_filters label p,.st-key-ah_toolbar label p {font-size:12px!important;color:#64748b;}
+.st-key-ah_filters input,.st-key-ah_filters [data-baseweb="select"]>div {background:#f8fafc;font-size:12px!important;min-height:34px;border-color:#e2e8f0;}
+.st-key-ah_filters button {min-height:34px;font-size:12px;}
+.st-key-ah_filters [data-testid="stSelectbox"] {display:flex;align-items:center;gap:6px;}
+.st-key-ah_filters [data-testid="stSelectbox"] label {margin:0;flex-shrink:0;}
+.st-key-ah_filters [data-testid="stSelectbox"]>div:last-child {min-width:0;flex:1;}
+.st-key-ah_new_upload a {background:#1f4e24;color:white!important;border-radius:10px;padding:10px 14px;justify-content:center;font-size:12px;font-weight:600;}
+.st-key-ah_new_upload a p {font-size:12px;color:white;}
+.st-key-ah_new_upload [data-testid="stIconMaterial"] {color:white;}
+.st-key-ah_new_upload [data-testid="stPageLink"] {display:flex;justify-content:flex-end;padding-top:4px;}
+.st-key-ah_inventory {gap:0;overflow:hidden;}
+.ah-scroll {overflow-x:auto;max-width:100%;}
+.ah-table {width:100%;min-width:1030px;border-collapse:collapse;font-size:12px;line-height:18px;font-family:BmtExecutiveInter,Inter,sans-serif;color:#334155;}
+.ah-table th {background:#f8fafc;text-align:left;padding:14px 16px;border-bottom:1px solid #e2e8f0;color:#64748b;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;}
+.ah-table td {padding:16px;border-bottom:1px solid #f1f5f9;vertical-align:middle;}
+.ah-table th:first-child {width:24%;}
+.ah-table time {white-space:nowrap;}
+.ah-table strong {display:block;font-size:14px;color:#0f172a;line-height:20px;font-weight:600;}
+.ah-table small {display:block;font-size:10px;color:#64748b;line-height:16px;max-width:260px;overflow-wrap:anywhere;}
+.ah-table .ah-file {font-family:ui-monospace,monospace;margin-top:3px;}
+.ah-kind {display:inline-block;background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;border-radius:3px;padding:3px 8px;max-width:108px;}
+.ah-kind.historical,.ah-kind.transactions {background:#f1f5f9;color:#475569;border-color:#e2e8f0;}
+.ah-table .ah-usage {font-weight:500;color:#047857;}
+.ah-table button {border:0;background:none;color:#1f4e24;font:600 12px BmtExecutiveInter,Inter,sans-serif;padding:8px 0;white-space:nowrap;cursor:pointer;}
+.ah-table button:hover {color:#059669;text-decoration:underline;}
+.ah-table button:focus-visible {outline:2px solid #059669;outline-offset:4px;border-radius:4px;}
+.ah-empty {padding:36px;text-align:center;color:#64748b;font-size:14px;}
+.st-key-ah_toolbar {padding:12px 16px;background:#f8fafc;gap:10px;}
+.st-key-ah_toolbar p {font-size:12px;color:#64748b;margin:0;}
+.st-key-ah_toolbar [data-testid="stCaptionContainer"] p {color:#475569;}
+.st-key-ah_toolbar button {min-height:30px;padding:2px 10px;font-size:12px!important;}
+.st-key-ah_toolbar [data-baseweb="select"]>div {min-height:30px;font-size:12px;}
+.ah-governance {padding:16px;background:#fffbeb;border:1px solid #fde68a;border-radius:12px;color:#78350f;font-size:12px;line-height:20px;}
+.ah-footer {text-align:center;color:#64748b;font-size:11px;padding:8px 0 20px;}
+.st-key-ah_detail {font-family:BmtExecutiveInter,Inter,sans-serif;gap:16px;}
+.st-key-ah_detail dl {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.st-key-ah_detail dt {color:#64748b;font-size:12px;}
+.st-key-ah_detail dd {margin:2px 0;font-size:14px;overflow-wrap:anywhere;}
+.st-key-ah_detail h3 {font-size:16px;padding:0;margin:0;}
+.st-key-ah_detail table {font-size:12px;}
+.st-key-ah_detail small {display:block;color:#64748b;}
+@media(max-width:1100px){.ah-current{gap:10px;}.ah-panel{padding:16px;}.ah-source-top{align-items:start;flex-wrap:wrap;}}
+@media(max-width:992px){.st-key-admin_history_page .adm-header h1{font-size:24px;}.st-key-ah_filters [data-testid="stHorizontalBlock"],.st-key-ah_toolbar [data-testid="stHorizontalBlock"]{flex-wrap:wrap;}.st-key-ah_filters [data-testid="stColumn"]{min-width:200px;}.st-key-ah_filters [data-testid="stColumn"]:first-child{min-width:230px;}.st-key-ah_toolbar [data-testid="stColumn"]{min-width:90px;}.st-key-ah_toolbar [data-testid="stColumn"]:first-child{min-width:170px;}}
