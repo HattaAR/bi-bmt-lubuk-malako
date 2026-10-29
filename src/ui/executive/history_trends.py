@@ -1,7 +1,7 @@
 """Referensi desain UI Riwayat & Tren; honest empty-state and real inventory."""
 from html import escape
 from urllib.parse import quote
-from src.ui.executive import number
+from src.ui.shared.formatters import number
 
 REASONS={'no_publication':'Belum ada laporan pembiayaan aktif yang dipublikasikan.',
  'insufficient_confirmed_positions':'Diperlukan minimal dua tanggal posisi terkonfirmasi yang berbeda.',

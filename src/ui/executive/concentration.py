@@ -3,9 +3,11 @@ from collections import Counter
 from html import escape
 import streamlit as st
 from src.auth.ui import page_guard
-from src.ui.executive import ROOT,FILTER_KEYS,dimension_filter,reset_filters,number,rupiah,compact_rupiah,percent
-from src.ui.treemap import treemap_rectangles
-from src.ui.motion import percent_markup,scope_attributes
+from src.ui.shared.paths import ROOT
+from src.ui.executive.layout import FILTER_KEYS, dimension_filter, reset_filters
+from src.ui.shared.formatters import number, rupiah, compact_rupiah, percent
+from src.ui.executive.treemap import treemap_rectangles
+from src.ui.executive.motion import percent_markup,scope_attributes
 
 GROUPS={'sector':'Sektor','marketing':'Marketing'}
 METRICS={'outstanding':'Outstanding','contracts':'Jumlah Kontrak'}
@@ -43,7 +45,7 @@ def _metric_changed():
 
 
 def _open_group():
-    from src.ui.monitoring import open_group_monitoring
+    from src.ui.executive.monitoring import open_group_monitoring
     if not open_group_monitoring(st.session_state['concentration_view'].open,st.session_state.get('_concentration_scope',{})):
         st.session_state['_concentration_message']='Kelompok tidak lagi tersedia. Pilih ulang dari tampilan terbaru.'
 

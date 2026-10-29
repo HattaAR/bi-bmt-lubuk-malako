@@ -4,7 +4,7 @@ import base64
 from pathlib import Path
 
 import streamlit as st
-from src.ui.assets import asset_text,asset_uri
+from src.ui.shared.assets import asset_text,asset_uri
 
 
 ASSETS = Path(__file__).resolve().parents[2] / "assets"

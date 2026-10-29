@@ -1,0 +1,38 @@
+/* Shared approved Beranda/Quality shell; opt-in only. */
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) {
+  --home-ink:#182323;--home-muted:#586665;--home-line:#e6eae9;
+  --home-teal:#16776b;--home-nav:#f4f6f5;--bmt-canvas:#fff;
+  --bmt-text:var(--home-ink);--bmt-muted:var(--home-muted);
+}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) [data-testid="stMain"] {background:#fff;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) [data-testid="stMainBlockContainer"] {max-width:1600px;padding:26px 28px 24px;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) [data-testid="stSidebar"] {background:var(--home-nav);border-right:1px solid var(--home-line);}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) [data-testid="stSidebar"][data-collapsed="false"] {width:224px!important;min-width:224px!important;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .st-key-executive_sidebar {padding:0;gap:3px;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .bmt-brand {gap:9px;padding-bottom:21px;margin-bottom:10px;border-color:var(--home-line);}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .bmt-brand img {width:34px!important;height:34px!important;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .bmt-brand strong {font-size:12px;line-height:17px;letter-spacing:-.2px;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .bmt-brand span {font-size:10px;line-height:15px;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .st-key-executive_current_nav {--bmt-nav-active:#e0e9e6;--bmt-nav-text:#164e46;--bmt-nav-icon:#16776b;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .st-key-executive_sidebar [data-testid="stPageLink"] a {min-height:34px;padding:8px 10px;border-radius:6px;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .st-key-executive_sidebar [data-testid="stPageLink"] a:hover {background:#e7eeeb;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .st-key-executive_primary_heading,
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .st-key-executive_analysis_heading {padding:16px 10px 7px;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .bmt-nav-group {font-size:10px;letter-spacing:.65px;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .bmt-avatar {width:30px;height:30px;background:var(--home-teal);border:0;color:white;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .st-key-executive_account {border-color:var(--home-line);}
+:is(.st-key-home_redesign,.st-key-quality_redesign) .st-key-executive_filters {padding:7px 0!important;border:0;border-bottom:1px solid var(--home-line);border-radius:0;box-shadow:none;}
+:is(.st-key-home_redesign,.st-key-quality_redesign) .st-key-executive_filters [data-testid="stHorizontalBlock"] {grid-template-columns:220px 230px minmax(100px,1fr);gap:14px;}
+:is(.st-key-home_redesign,.st-key-quality_redesign) .st-key-executive_filters .react-aria-ComboBox [role="group"] {background:#fff;border-color:var(--home-line);border-radius:6px;}
+:is(.st-key-home_redesign,.st-key-quality_redesign) .st-key-executive_filters [role="combobox"] {height:28px;}
+:is(.st-key-home_redesign,.st-key-quality_redesign) .st-key-executive_filters [data-testid="stColumn"]:nth-child(2)::before {border-color:var(--home-line);}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) .st-key-executive_sidebar :is(a,button,input):focus-visible {outline:2px solid var(--home-teal);outline-offset:3px;}
+body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)):has([data-testid="stSidebar"][data-collapsed="true"]) [data-testid="stMainBlockContainer"] {padding-top:58px;}
+@container (max-width:900px) {
+ :is(.st-key-home_redesign,.st-key-quality_redesign) .st-key-executive_filters [data-testid="stHorizontalBlock"] {grid-template-columns:240px 240px minmax(100px,1fr);}
+ :is(.st-key-home_redesign,.st-key-quality_redesign) .st-key-executive_filters [data-testid="stColumn"]:last-child {grid-column:auto;}
+ :is(.st-key-home_redesign,.st-key-quality_redesign) .st-key-executive_filters [data-testid="stSelectbox"] {flex-direction:row;align-items:center;}
+}
+@media(max-width:992px) {
+ body:has(:is(.st-key-home_redesign,.st-key-quality_redesign)) [data-testid=stMainBlockContainer] {padding-top:58px;}
+}

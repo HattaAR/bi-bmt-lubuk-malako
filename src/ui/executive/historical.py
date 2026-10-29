@@ -1,8 +1,8 @@
 """Historical referensi desain UI, computed from one service result."""
 from html import escape
 import streamlit as st
-from src.ui.executive import number,percent
-from src.ui.motion import percent_markup,scope_attributes
+from src.ui.shared.formatters import number, percent
+from src.ui.executive.motion import percent_markup,scope_attributes
 
 KEYS=('historical_year','historical_duration','historical_nominal')
 

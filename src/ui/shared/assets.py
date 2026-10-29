@@ -3,7 +3,7 @@ import base64
 from functools import lru_cache
 from pathlib import Path
 
-ASSETS=Path(__file__).resolve().parents[2]/'assets'
+from src.ui.shared.paths import ASSETS
 
 
 def _identity(path):

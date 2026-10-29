@@ -10,6 +10,7 @@ function installMotion() {
   const duration = 500, easing = 'cubic-bezier(0.2,0.7,0.2,1)';
   const instance=crypto.randomUUID();
   const records = new Map(), rootScopes = new Map(), active = new Set(), pending = new Map();
+  const homeStates = new Map(), homeNumbers = new Map();
   let seenNodes = new WeakSet(), page = null, visit = 0, enabled = false;
   let scheduled = 0, completed = 0, cancelled = 0, started = 0;
   const roots = new Set();
@@ -21,8 +22,17 @@ function installMotion() {
     ['composition', '.qp-stacked:has(button)'],
     ['treemap', '.cn-treemap:has(.cn-tile)'],
     ['dot', '.mk-point>i'],
+    // Opt-in pilot targets share this controller; other pages keep their rules.
+    ['vertical', '[data-bmt-home-bar]'],
+    ['reveal', '[data-bmt-home-reveal]'],
+    ['panel', '.home-category-panel'],
+    ['panel', '.home-plot'],
+    ['horizontal', '[data-bmt-quality-bar]'],
+    ['donut', '[data-bmt-quality-donut]'],
+    ['panel', '.qp-composition'],
   ];
   try { CSS.registerProperty({name:'--bmt-composition-progress',syntax:'<percentage>',inherits:true,initialValue:'100%'}); } catch (_) {}
+  try { CSS.registerProperty({name:'--bmt-donut-progress',syntax:'<angle>',inherits:true,initialValue:'360deg'}); } catch (_) {}
   const hash = text => { let h=2166136261;for(let i=0;i<text.length;i++) h=Math.imul(h^text.charCodeAt(i),16777619);return (h>>>0).toString(16); };
   const emit = (phase,kind) => window.dispatchEvent(new CustomEvent('bmt:motion',{detail:{phase,kind,at:performance.now()}}));
   const visible = el => { const r=el.getBoundingClientRect();return r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight&&getComputedStyle(el).visibility!=='hidden'; };
@@ -33,7 +43,7 @@ function installMotion() {
   };
   function changePage(next){
     enabled=!!next;
-    if(page!==next){cancelAll();records.clear();rootScopes.clear();seenNodes=new WeakSet();visit++;page=next;}
+    if(page!==next){cancelAll();records.clear();rootScopes.clear();homeStates.clear();homeNumbers.clear();seenNodes=new WeakSet();visit++;page=next;}
   }
   const cancelAll = () => {
     for (const job of [...active]) job.finish(true);
@@ -46,6 +56,7 @@ function installMotion() {
     if (!el.isConnected || !enabled || job.visit!==visit || job.sourceRoot.dataset.bmtSnapshot!==token) return;
     if (records.get(key)===signature) return;
     records.set(key,signature);
+    if(job.numberSource!==undefined)homeNumbers.set(key,job.numberSource);
     if (records.size>512) records.delete(records.keys().next().value);
     if (reduced.matches) return;
     let animation=null,raf=0,done=false;
@@ -54,37 +65,52 @@ function installMotion() {
     job.finish=(wasCancelled=false) => {
       if(done)return;done=true;
       cancelAnimationFrame(raf);animation?.cancel();
-      if(visual&&el.isConnected&&el.dataset.bmtFinal===final) visual.textContent=final;
+      if(visual&&el.isConnected&&el.dataset.bmtFinal===final&&
+         (!['home','quality'].includes(job.sourceRoot.dataset.bmtMotion)||job.sourceRoot.dataset.bmtSnapshot===token)) visual.textContent=final;
       active.delete(job);
       if(wasCancelled)cancelled++;else completed++;
       emit(wasCancelled?'cancel':'end',kind);
     };
     active.add(job);started++;
+    const home=job.sourceRoot.dataset.bmtMotion==='home';
+    const quality=job.sourceRoot.dataset.bmtMotion==='quality',modern=home||quality;
+    const panel=kind==='card'||kind==='panel';
+    const runDuration=modern?(panel?300:760):duration;
+    const runDelay=modern?(panel?60*Math.min(job.index,2):60+60*Math.min(job.index,2)):0;
     if (kind==='number') {
       const value=Number(el.dataset.bmtCount);
       if(!visual||!Number.isFinite(value)){job.finish();return;}
       visual.style.minWidth=visual.getBoundingClientRect().width+'px';
       visual.style.display='inline-block';visual.style.fontVariantNumeric='tabular-nums';
-      const format=new Intl.NumberFormat('id-ID',{minimumFractionDigits:2,maximumFractionDigits:2});
-      const began=performance.now();visual.textContent=format.format(0)+'%';
+      const places=modern?Number(el.dataset.bmtPlaces??2):2;
+      const prefix=modern?(el.dataset.bmtPrefix??''):'';
+      const rawSuffix=modern?(el.dataset.bmtSuffix??'%'):'%';
+      const suffix=modern&&el.hasAttribute('data-bmt-suffix')&&rawSuffix&&!rawSuffix.startsWith(' ')?' '+rawSuffix:rawSuffix;
+      const format=new Intl.NumberFormat('id-ID',{minimumFractionDigits:places,maximumFractionDigits:places});
+      const began=performance.now()+runDelay;visual.textContent=prefix+format.format(0)+suffix;
       emit('start',kind);
       const tick=now=>{
         if(!el.isConnected||job.visit!==visit||job.sourceRoot.dataset.bmtSnapshot!==token||el.dataset.bmtFinal!==final){job.finish(true);return;}
-        const p=Math.min(1,(now-began)/duration), eased=1-Math.pow(1-p,3);
+        if(now<began){raf=requestAnimationFrame(tick);return;}
+        const p=Math.min(1,(now-began)/runDuration), eased=1-Math.pow(1-p,3);
         if(p===1){job.finish();return;}
-        visual.textContent=format.format(value*eased)+'%';raf=requestAnimationFrame(tick);
+        visual.textContent=prefix+format.format(value*eased)+suffix;raf=requestAnimationFrame(tick);
       };raf=requestAnimationFrame(tick);
     } else {
       emit('start',kind);
       let frames;
       if(kind==='horizontal'||kind==='vertical') {
         el.style.transformOrigin=kind==='horizontal'?'left center':'center bottom';
-        frames={transform:kind==='horizontal'?['scaleX(0)','scaleX(1)']:['scaleY(0)','scaleY(1)']};
+        const start=home?0.08:0;
+        frames={transform:kind==='horizontal'?[`scaleX(${start})`,'scaleX(1)']:[`scaleY(${start})`,'scaleY(1)']};
       } else if(kind==='composition') {
         el.classList.add('bmt-motion-composition');
         frames={'--bmt-composition-progress':['0%','100%']};
-      } else frames={opacity:(kind==='card'||kind==='treemap')?[0.85,1]:[0.12,1]};
-      animation=el.animate(frames,{duration,easing});
+      } else if(kind==='donut')frames={'--bmt-donut-progress':['0deg','360deg']};
+      else if(kind==='reveal')frames={clipPath:['inset(0 92% 0 0)','inset(0 0% 0 0)']};
+      else if(modern&&panel)frames={opacity:[.86,1],transform:['translateY(6px)','translateY(0)']};
+      else frames={opacity:(kind==='card'||kind==='treemap')?[0.85,1]:[0.12,1]};
+      animation=el.animate(frames,{duration:runDuration,easing,...(modern?{delay:runDelay,fill:'backwards'}:{})});
       animation.onfinish=()=>job.finish();animation.oncancel=()=>{if(!done)job.finish(true);};
     }
   }
@@ -97,6 +123,16 @@ function installMotion() {
     changePage(sourceRoot.dataset.bmtPage);
     const nextScope=sourceRoot.dataset.bmtSnapshot;
     const rootKey=sourceRoot.dataset.bmtPage+'|'+sourceRoot.className+'|';
+    const home=sourceRoot.dataset.bmtMotion==='home';
+    const modern=home||sourceRoot.dataset.bmtMotion==='quality';
+    let trigger=null;
+    if(modern){
+      const context=sourceRoot.dataset.bmtContext||nextScope,previous=homeStates.get(rootKey);
+      if(!previous||previous.token!==nextScope){
+        trigger=!previous?'entry':previous.context!==context?'data':'metric';
+        homeStates.set(rootKey,{token:nextScope,context,trigger});
+      }else trigger=previous.trigger;
+    }
     if(rootScopes.get(rootKey)!==nextScope){
       for(const key of [...records.keys()])if(key.startsWith(rootKey))records.delete(key);
       rootScopes.set(rootKey,nextScope);
@@ -109,7 +145,15 @@ function installMotion() {
     const source=kind==='number'?el.dataset.bmtCount+'|'+el.dataset.bmtFinal:
       el.getAttribute('style')+'|'+el.textContent+'|'+(kind==='composition'||kind==='treemap'?el.innerHTML:'');
     const signature=nextScope+'|'+hash(source);
-    const job={el,kind,key,signature,token:nextScope,sourceRoot,visit};
+    if(modern){
+      // Only entry fades panels. Data/metric reruns animate current data, not the shell.
+      if((kind==='card'||kind==='panel')&&trigger!=='entry')return;
+      if(kind==='number'){
+        if((trigger!=='metric'&&homeNumbers.get(key)===source)||Number(el.dataset.bmtCount)===0){homeNumbers.set(key,source);return;}
+      }
+    }
+    const job={el,kind,key,signature,token:nextScope,sourceRoot,visit,index,trigger,
+      ...(modern&&kind==='number'?{numberSource:source}:{})};
     if(visible(el))start(job);
     else {pending.set(el,job);intersection.observe(el);}
   }

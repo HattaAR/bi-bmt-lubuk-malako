@@ -1,9 +1,11 @@
-from src.ui.assets import asset_text
+from src.ui.shared.assets import asset_text
 import streamlit as st
 from src.auth.ui import page_guard,protected_action
 from src.auth.actions import read_history_trends
-from src.ui.executive import ROOT,load_styles,number
-from src.ui.history_trends import REASONS,export_text,position_text,reports_html,event_rows,decorative_icon
+from src.ui.shared.paths import ROOT
+from src.ui.executive.layout import load_styles
+from src.ui.shared.formatters import number
+from src.ui.executive.history_trends import REASONS,export_text,position_text,reports_html,event_rows,decorative_icon
 from html import escape
 
 principal=page_guard('executive')
@@ -26,7 +28,7 @@ with st.container(key='executive_home'),st.container(key='executive_history_tren
         with metric:st.segmented_control('Metrik tren',['Outstanding','Tunggakan Pokok','NPF'],default='Outstanding',disabled=True,label_visibility='collapsed',help='Belum tersedia pasangan snapshot dengan kesebandingan terverifikasi.')
         with st.container(key='trend_empty'):
             st.html('<div class="rt-empty-copy"><div class="rt-empty-icon" aria-hidden="true">'+decorative_icon('trend')+'</div><h3>Data antarperiode belum tersedia</h3><p>Grafik memerlukan laporan pembanding, tanggal posisi terkonfirmasi, dan cakupan yang disahkan sebanding.</p></div>')
-            st.page_link(ROOT/'pages/executive_quality.py',label='Lihat Kondisi Saat Ini',icon=':material/arrow_forward:')
+            st.page_link(ROOT/'pages/executive/quality.py',label='Lihat Kondisi Saat Ini',icon=':material/arrow_forward:')
     with st.container(key='trend_reports',border=True):
         st.html('<h2>Laporan Posisi yang Tersedia</h2><p class="rt-muted">Laporan pembiayaan aktif terpublikasi yang tercatat di sistem.</p>'+reports_html(result['reports'],current))
     with st.container(key='trend_history_details'):

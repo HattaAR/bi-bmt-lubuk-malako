@@ -1,9 +1,10 @@
-from src.ui.assets import asset_text
+from src.ui.shared.assets import asset_text
 import streamlit as st
 from src.auth.ui import page_guard,protected_action
 from src.auth.actions import read_concentration
-from src.ui.executive import ROOT,FILTER_KEYS,load_styles,header
-from src.ui.concentration import initialize,controls,render_concentration
+from src.ui.shared.paths import ROOT
+from src.ui.executive.layout import FILTER_KEYS, load_styles, header
+from src.ui.executive.concentration import initialize,controls,render_concentration
 
 principal=page_guard('executive')
 initialize()

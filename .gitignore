@@ -125,3 +125,4 @@ Desktop.ini
 *.temp
 *.swp
 *.swo
+tests/.role-refactor-secret.json

@@ -1,86 +1,86 @@
 /* Referensi desain UI Model & Metodologi; scoped to this authenticated page. */
-body:has(.st-key-executive_methodology_page) { --bmt-canvas:#f8fafc; }
-.st-key-executive_methodology_page { gap:24px; color:#1e293b; }
-.st-key-methodology_usage_content,.st-key-methodology_evaluation_content,.st-key-methodology_data_content { gap:24px; }
-.st-key-executive_methodology_page .bmt-page-header h1 { font-size:28px; line-height:36px; color:#1e293b; }
-.st-key-executive_methodology_page .bmt-page-header p { font-size:14px; line-height:20px; color:#64748b; }
-.st-key-methodology_header [data-testid=stDownloadButton] button { min-height:36px; padding:6px 12px; font-size:12px; border-color:#e2e8f0; border-radius:8px; background:#f8fafc; white-space:nowrap; }
-.st-key-methodology_tabs [role=tablist] { background:white; border:1px solid #e2e8f0; border-radius:12px; padding:6px; gap:8px; box-shadow:0 1px 2px #0000000a; }
-.st-key-methodology_tabs [role=tab] { flex:1; min-width:0; justify-content:center; height:42px; padding:8px 12px; border-radius:8px; background:transparent; color:#64748b; }
+body:has(.st-key-executive_methodology_page) { --bmt-canvas:var(--ws-soft); }
+.st-key-executive_methodology_page { gap:var(--ws-space-6); color:var(--ws-text); }
+.st-key-methodology_usage_content,.st-key-methodology_evaluation_content,.st-key-methodology_data_content { gap:var(--ws-space-6); }
+.st-key-executive_methodology_page .bmt-page-header h1 { font-size:26px; line-height:36px; color:var(--ws-text); }
+.st-key-executive_methodology_page .bmt-page-header p { font-size:14px; line-height:20px; color:var(--ws-muted); }
+.st-key-methodology_header [data-testid=stDownloadButton] button { min-height:36px; padding:6px 12px; font-size:12px; border-color:var(--ws-border); border-radius:8px; background:var(--ws-soft); white-space:nowrap; }
+.st-key-methodology_tabs [role=tablist] { background:white; border:1px solid var(--ws-border); border-radius:var(--ws-panel-radius); padding:6px; gap:8px; box-shadow:var(--ws-panel-shadow); }
+.st-key-methodology_tabs [role=tab] { flex:1; min-width:0; justify-content:center; height:42px; padding:8px 12px; border-radius:8px; background:transparent; color:var(--ws-muted); }
 .st-key-methodology_tabs [role=tab] p { font-size:13px; line-height:20px; font-weight:600; }
-.st-key-methodology_tabs [role=tab]:hover { background:#f8fafc; color:#1e293b; }
+.st-key-methodology_tabs [role=tab]:hover { background:var(--ws-soft); color:var(--ws-text); }
 .st-key-methodology_tabs [role=tab][aria-selected=true] { background:#1f4e24; color:white; }
 .st-key-methodology_tabs [role=tab][aria-selected=true] [data-testid=stIconMaterial] { color:white; }
 /* Streamlit 1.66 uses React Aria; remove its indicator, preserve focus rings. */
 .st-key-methodology_tabs [data-testid=stTab] > .react-aria-SelectionIndicator { display:none; }
 .st-key-methodology_tabs [role=tab] span[role=img] { font-size:18px; line-height:20px; vertical-align:middle!important; margin-right:4px; }
 .st-key-methodology_tabs [role=tabpanel] { padding-top:24px; }
-.st-key-methodology_usage,.st-key-methodology_status,.st-key-methodology_evaluation,.st-key-methodology_context,.st-key-methodology_metrics,.st-key-methodology_caveats,.st-key-methodology_sources,.st-key-methodology_definitions { background:white; padding:24px!important; border:1px solid #e2e8f0; border-radius:12px; box-shadow:0 1px 2px #0000000a; gap:16px; }
-.st-key-executive_methodology_page :is(h2,h3) { margin:0; padding:0; color:#1e293b; font-weight:600; display:flex; align-items:center; gap:8px; }
+.st-key-methodology_usage,.st-key-methodology_status,.st-key-methodology_evaluation,.st-key-methodology_context,.st-key-methodology_metrics,.st-key-methodology_caveats,.st-key-methodology_sources,.st-key-methodology_definitions { background:white; padding:var(--ws-space-6)!important; border:1px solid var(--ws-border); border-radius:var(--ws-panel-radius); box-shadow:var(--ws-panel-shadow); gap:16px; }
+.st-key-executive_methodology_page :is(h2,h3) { margin:0; padding:0; color:var(--ws-text); font-weight:600; display:flex; align-items:center; gap:8px; }
 .st-key-executive_methodology_page h2 { font-size:18px; line-height:26px; }
 .st-key-executive_methodology_page h3 { font-size:14px!important; line-height:22px; }
 .st-key-executive_methodology_page .mm-evaluation-title { font-size:28px; line-height:36px; font-weight:700; letter-spacing:-.6px; }
 .mm-icon { width:18px; height:18px; flex-shrink:0; }
-.mm-lead { font-size:14px; line-height:24px; color:#475569; margin:4px 0 20px; }
-.mm-muted { font-size:12px; line-height:20px; color:#64748b; margin:4px 0 0; }
+.mm-lead { font-size:14px; line-height:24px; color:var(--ws-muted); margin:4px 0 20px; }
+.mm-muted { font-size:12px; line-height:20px; color:var(--ws-muted); margin:4px 0 0; }
 .mm-two { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-.mm-divider { border-top:1px solid #f1f5f9; padding-top:16px; margin-top:20px; }
-.mm-soft { padding:20px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; }
-.mm-soft ul { padding-left:16px; margin:12px 0 0; font-size:13px; line-height:22px; color:#475569; }
+.mm-divider { border-top:1px solid var(--ws-line-soft); padding-top:16px; margin-top:20px; }
+.mm-soft { padding:20px; background:var(--ws-soft); border:1px solid var(--ws-border); border-radius:8px; }
+.mm-soft ul { padding-left:16px; margin:12px 0 0; font-size:13px; line-height:22px; color:var(--ws-muted); }
 .mm-soft li { padding-left:2px; margin-top:8px; }
 .mm-soft li::marker { color:#059669; }
 .st-key-methodology_usage .mm-steps { list-style:none; padding:0; margin:12px 0 0; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-.mm-steps li { display:flex; gap:12px; padding:16px; border:1px solid #e2e8f0; border-radius:8px; box-shadow:0 1px 2px #0000000a; }
+.mm-steps li { display:flex; gap:12px; padding:16px; border:1px solid var(--ws-border); border-radius:8px; box-shadow:var(--ws-panel-shadow); }
 .mm-steps b { display:grid; place-items:center; width:28px; height:28px; flex-shrink:0; border-radius:50%; background:#1f4e24; color:white; font-size:12px; }
 .mm-steps strong { font-size:13px; font-weight:600; line-height:20px; }
-.mm-steps p { margin:2px 0 0; font-size:12px; line-height:18px; color:#64748b; }
+.mm-steps p { margin:2px 0 0; font-size:12px; line-height:18px; color:var(--ws-muted); }
 .mm-warning { padding:16px; border:1px solid #fde68a; border-radius:8px; background:#fffbeb; color:#92400e; font-size:13px; line-height:22px; margin:0; }
 .st-key-methodology_usage .mm-warning,.st-key-methodology_data_notes .mm-warning { margin-top:20px; }
-.mm-panel-heading { display:flex; justify-content:space-between; align-items:start; gap:16px; padding-bottom:16px; border-bottom:1px solid #f1f5f9; }
-.mm-status { font-size:11px; line-height:18px; font-weight:500; color:#475569; background:#f1f5f9; padding:4px 10px; border-radius:8px; white-space:nowrap; }
+.mm-panel-heading { display:flex; justify-content:space-between; align-items:start; gap:16px; padding-bottom:16px; border-bottom:1px solid var(--ws-line-soft); }
+.mm-status { font-size:11px; line-height:18px; font-weight:500; color:var(--ws-muted); background:var(--ws-line-soft); padding:4px 10px; border-radius:8px; white-space:nowrap; }
 .mm-metadata { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:16px; }
-.mm-metadata > div { display:flex; flex-direction:column; gap:6px; padding:14px; background:#f8fafc; border:1px solid #f1f5f9; border-radius:8px; }
-.mm-metadata span { font-size:12px; color:#64748b; }
+.mm-metadata > div { display:flex; flex-direction:column; gap:6px; padding:14px; background:var(--ws-soft); border:1px solid var(--ws-line-soft); border-radius:8px; }
+.mm-metadata span { font-size:12px; color:var(--ws-muted); }
 .mm-metadata strong { font:600 15px/22px ui-monospace,monospace; }
-.st-key-executive_methodology_page [data-testid=stExpander] { border:1px solid #e2e8f0; border-radius:10px; background:white; }
+.st-key-executive_methodology_page [data-testid=stExpander] { border:1px solid var(--ws-border); border-radius:10px; background:white; }
 .st-key-executive_methodology_page [data-testid=stExpander] summary { padding:12px 16px; }
 .st-key-executive_methodology_page [data-testid=stExpander] summary p { font-size:13px; font-weight:500; }
-.st-key-executive_methodology_page [data-testid=stExpanderDetails] p { font-size:13px; line-height:22px; color:#475569; }
-.st-key-methodology_evaluation_mode { padding:14px!important; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; }
+.st-key-executive_methodology_page [data-testid=stExpanderDetails] p { font-size:13px; line-height:22px; color:var(--ws-muted); }
+.st-key-methodology_evaluation_mode { padding:14px!important; background:var(--ws-soft); border:1px solid var(--ws-border); border-radius:8px; }
 .st-key-methodology_evaluation_mode [data-testid=stWidgetLabel] p { text-transform:uppercase; letter-spacing:.3px; font-size:11px; }
-.st-key-methodology_evaluation_mode [data-testid=stButtonGroup] { padding:4px; gap:2px; background:white; border:1px solid #e2e8f0; border-radius:8px; }
-.st-key-methodology_evaluation_mode [data-testid=stButtonGroup] button { min-height:28px; border:0; border-radius:6px; padding:4px 12px; background:transparent; color:#64748b; font-size:12px; }
+.st-key-methodology_evaluation_mode [data-testid=stButtonGroup] { padding:4px; gap:2px; background:white; border:1px solid var(--ws-border); border-radius:8px; }
+.st-key-methodology_evaluation_mode [data-testid=stButtonGroup] button { min-height:28px; border:0; border-radius:6px; padding:4px 12px; background:transparent; color:var(--ws-muted); font-size:12px; }
 .st-key-methodology_evaluation_mode [aria-checked=true] { background:#1f4e24!important; color:white!important; }
-.mm-mode-help { font-size:12px; font-style:italic; line-height:20px; color:#64748b; margin:0 0 16px; }
-.mm-table-scroll { max-width:100%; overflow-x:auto; border:1px solid #e2e8f0; border-radius:8px; margin-top:16px; }
+.mm-mode-help { font-size:12px; font-style:italic; line-height:20px; color:var(--ws-muted); margin:0 0 16px; }
+.mm-table-scroll { max-width:100%; overflow-x:auto; border:1px solid var(--ws-border); border-radius:8px; margin-top:16px; }
 .mm-table-scroll:focus-visible { outline:3px solid #0f766e; outline-offset:2px; }
 .mm-table-scroll table { width:100%; min-width:620px; border-collapse:collapse; font-size:13px; line-height:22px; }
-.mm-table-scroll :is(th,td) { padding:14px 16px; text-align:left; border-bottom:1px solid #f1f5f9; vertical-align:top; }
-.mm-table-scroll th { background:#f8fafc; color:#64748b; font-size:11px; line-height:18px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; border-color:#e2e8f0; }
+.mm-table-scroll :is(th,td) { padding:14px 16px; text-align:left; border-bottom:1px solid var(--ws-line-soft); vertical-align:top; }
+.mm-table-scroll th { background:var(--ws-soft); color:var(--ws-muted); font-size:11px; line-height:18px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; border-color:var(--ws-border); }
 .mm-table-scroll tbody tr:last-child td { border-bottom:0; }
 .mm-table-scroll tbody tr:hover { background:#f8fafcb3; }
 .mm-evaluation-table td:not(:first-child),.mm-evaluation-table th:not(:first-child) { text-align:right; }
 .mm-evaluation-table td { height:52px; }
-.mm-missing { font-family:ui-monospace,monospace; color:#94a3b8; }
-.mm-context { display:flex; flex-wrap:wrap; gap:12px; padding:16px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; font-size:13px; line-height:20px; color:#475569; margin:16px 0; }
+.mm-missing { font-family:ui-monospace,monospace; color:var(--ws-muted); }
+.mm-context { display:flex; flex-wrap:wrap; gap:12px; padding:16px; background:var(--ws-soft); border:1px solid var(--ws-border); border-radius:8px; font-size:13px; line-height:20px; color:var(--ws-muted); margin:16px 0; }
 .mm-context span { color:#cbd5e1; }
 .mm-success { padding:12px; border:1px solid #d1fae5; border-radius:8px; background:#ecfdf5; color:#065f46; font-size:13px; line-height:22px; margin:16px 0 0; }
-.mm-readonly,.mm-soft-note { font-size:12px; line-height:20px; padding:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; color:#64748b; margin:16px 0 0; }
+.mm-readonly,.mm-soft-note { font-size:12px; line-height:20px; padding:14px; background:var(--ws-soft); border:1px solid var(--ws-border); border-radius:8px; color:var(--ws-muted); margin:16px 0 0; }
 .mm-readonly { text-align:center; margin:0; }
 .mm-source-table code { color:#065f46; background:#ecfdf5; border:1px solid #d1fae5; border-radius:4px; padding:2px 5px; font-size:11px; white-space:normal; overflow-wrap:anywhere; }
 .mm-source-table td { font-size:12px; line-height:20px; }
-.mm-source-table td:last-child,.mm-definition-table td:last-child { color:#64748b; }
+.mm-source-table td:last-child,.mm-definition-table td:last-child { color:var(--ws-muted); }
 .mm-definition-table th:first-child { width:24%; }
 .mm-definition-table th:nth-child(2) { width:39%; }
 .st-key-methodology_definitions [data-testid=stTextInput] input { font-size:12px; }
-.st-key-methodology_data_notes { gap:24px; }
+.st-key-methodology_data_notes { gap:var(--ws-space-6); }
 .st-key-methodology_data_notes [data-testid=stExpander] summary { padding:16px 20px; }
 .mm-date-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.mm-date-grid > div { border:1px solid #e2e8f0; border-radius:8px; padding:14px; }
+.mm-date-grid > div { border:1px solid var(--ws-border); border-radius:8px; padding:14px; }
 .mm-date-grid strong { font-size:13px; font-weight:500; }
-.mm-date-grid p { font-size:12px!important; line-height:20px!important; margin:4px 0; color:#64748b!important; }
+.mm-date-grid p { font-size:12px!important; line-height:20px!important; margin:4px 0; color:var(--ws-muted)!important; }
 .mm-date-grid small { font-size:11px; color:#92400e; }
-.mm-footer { color:#64748b; font-size:12px; line-height:20px; text-align:center; margin:0; padding:8px 0 20px; }
+.mm-footer { color:var(--ws-muted); font-size:12px; line-height:20px; text-align:center; margin:0; padding:8px 0 20px; }
 @container(max-width:850px) {
  .st-key-methodology_header > [data-testid=stLayoutWrapper] > [data-testid=stHorizontalBlock],.st-key-methodology_evaluation_mode > [data-testid=stLayoutWrapper] > [data-testid=stHorizontalBlock] { flex-direction:column; }
  .st-key-methodology_header [data-testid=stColumn],.st-key-methodology_evaluation_mode [data-testid=stColumn] { width:100%!important; }

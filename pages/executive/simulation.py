@@ -1,10 +1,12 @@
-from src.ui.assets import asset_text
+from src.ui.shared.assets import asset_text
 from datetime import date
 import streamlit as st
 from src.auth.ui import page_guard,protected_action
 from src.auth.actions import read_simulation_context
-from src.ui.executive import ROOT,load_styles,rupiah,number
-from src.ui.simulation import (initialize,invalidate,search_changed,contract_changed,months_changed,slider_changed,
+from src.ui.shared.paths import ROOT
+from src.ui.executive.layout import load_styles
+from src.ui.shared.formatters import rupiah, number
+from src.ui.executive.simulation import (initialize,invalidate,search_changed,contract_changed,months_changed,slider_changed,
     reset_scenario,contract_html,result_html,comparison_html,schedule_html)
 from src.services.simulation import simulate_principal,compare_scenarios
 

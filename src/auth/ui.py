@@ -94,7 +94,7 @@ def protected_action(action, *args, **kwargs):
     """Actions perform live authorization; never expose driver/row errors."""
     try:
         result = action(st.session_state, *args, **kwargs)
-        from src.ui.page_runtime import finish_loading
+        from src.ui.executive.page_runtime import finish_loading
         finish_loading(result)
         return result
     except (AuthenticationRequired, AccessDenied):
@@ -103,6 +103,6 @@ def protected_action(action, *args, **kwargs):
         st.error("Layanan autentikasi sementara tidak tersedia.")
     except (pymysql.MySQLError, OSError, ValueError):
         st.error("Pemeriksaan tidak dapat diselesaikan. Periksa konfigurasi atau sumber melalui CLI lokal.")
-    from src.ui.page_runtime import finish_loading
+    from src.ui.executive.page_runtime import finish_loading
     finish_loading()
     st.stop()

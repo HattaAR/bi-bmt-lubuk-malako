@@ -3,9 +3,11 @@ from collections import Counter
 from decimal import Decimal,ROUND_CEILING,ROUND_FLOOR,localcontext
 from html import escape
 import streamlit as st
-from src.ui.executive import ROOT,FILTER_KEYS,reset_filters,number,rupiah,compact_rupiah,percent
-from src.ui.monitoring import open_group_monitoring
-from src.ui.motion import percent_markup,scope_attributes
+from src.ui.shared.paths import ROOT
+from src.ui.executive.layout import FILTER_KEYS, reset_filters
+from src.ui.shared.formatters import number, rupiah, compact_rupiah, percent
+from src.ui.executive.monitoring import open_group_monitoring
+from src.ui.executive.motion import percent_markup,scope_attributes
 
 METRICS={'npf':'Rasio NPF','arrears':'Nominal Tunggakan Pokok'}
 REASONS={'unknown_collectibility':'Kolektibilitas tidak dikenali; NPF belum lengkap.',

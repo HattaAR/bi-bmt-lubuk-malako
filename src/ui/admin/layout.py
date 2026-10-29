@@ -3,8 +3,10 @@ from html import escape
 from urllib.parse import quote
 import streamlit as st
 import pymysql
-from src.ui.executive import ROOT,number,rupiah
-from src.ui.assets import asset_text,asset_uri
+from src.ui.shared.paths import ROOT
+from src.ui.shared.formatters import number, rupiah
+from src.ui.shared.assets import asset_text,asset_uri
+from src.ui.shared.design import workspace_css
 
 WARNING_IMPACT={
  'POSITION_DATE_UNKNOWN':'BI statis dapat digunakan. Tren posisi dan pengingat berbasis tanggal posisi belum tersedia.',
@@ -28,7 +30,7 @@ def icon(kind):
     return '<img alt="" aria-hidden="true" width="22" height="22" src="data:image/svg+xml,'+quote(svg,safe='')+'">'
 
 
-def load_styles():st.html('<style>'+asset_text(ROOT/'assets/css/admin.css')+'</style>')
+def load_styles():st.html('<style>'+workspace_css()+asset_text(ROOT/'assets/css/admin.css')+'</style>')
 
 
 def admin_sidebar(principal,on_logout,active_title):
@@ -40,9 +42,9 @@ def admin_sidebar(principal,on_logout,active_title):
         for file,label,symbol,title in [('admin_upload','Unggah & Validasi Data','upload_file','Unggah & validasi'),('admin_history','Riwayat Unggahan','history','Riwayat unggahan')]:
             with st.container(key='admin_nav_'+file,gap=None):
                 if title==active_title:
-                    with st.container(key='admin_current_nav',gap=None):st.page_link(ROOT/f'pages/{file}.py',label=label,icon=f':material/{symbol}:')
-                else:st.page_link(ROOT/f'pages/{file}.py',label=label,icon=f':material/{symbol}:')
-        if 'executive' in principal.roles:st.page_link(ROOT/'pages/executive_home.py',label='Beranda Pimpinan',icon=':material/dashboard:')
+                    with st.container(key='admin_current_nav',gap=None):st.page_link(ROOT/f'pages/admin/{file.removeprefix("admin_")}.py',label=label,icon=f':material/{symbol}:')
+                else:st.page_link(ROOT/f'pages/admin/{file.removeprefix("admin_")}.py',label=label,icon=f':material/{symbol}:')
+        if 'executive' in principal.roles:st.page_link(ROOT/'pages/executive/home.py',label='Beranda Pimpinan',icon=':material/dashboard:')
         with st.container(key='admin_account'):
             left,right=st.columns([5,1],gap='small',vertical_alignment='center')
             with left:st.html(f'<div class="adm-profile"><span>{escape(principal.display_name[:2].upper())}</span><div><strong>{escape(principal.display_name)}</strong><small>KSPPS BMT Lubuk Malako</small></div></div>')
@@ -50,7 +52,7 @@ def admin_sidebar(principal,on_logout,active_title):
 
 
 def header():
-    st.html('<header class="adm-header"><div><div class="adm-breadcrumb">Admin / Unggah &amp; Validasi Data</div><h1>Unggah &amp; Validasi Data</h1><p>Periksa file pembiayaan sebelum digunakan pada dashboard.</p></div><span class="adm-badge">● Workspace Admin Aktif</span></header>')
+    st.html('<header class="adm-header"><div><div class="adm-breadcrumb">Admin / Unggah &amp; Validasi Data</div><h1>Unggah &amp; Validasi Data</h1><p>Periksa file pembiayaan sebelum digunakan pada dashboard.</p></div></header>')
 
 
 def stepper(stage):
@@ -58,7 +60,9 @@ def stepper(stage):
     items=[]
     for i,(title,description) in enumerate(labels,1):
         status='active' if i==stage else 'done' if i<stage else 'locked'
-        items.append(f'<div class="adm-step {status}" '+('aria-current="step"' if i==stage else '')+f'><span class="adm-step-number">{"✓" if i<stage else i}</span><div><strong>Tahap {i}: {title}</strong><small>{escape(description)}</small></div></div>')
+        if status=='locked':description='Selesaikan tahap unggah' if i==2 else 'Setelah kandidat dimuat'
+        availability=' aria-disabled="true" title="'+escape(description)+'"' if status=='locked' else ''
+        items.append(f'<div class="adm-step {status}" '+('aria-current="step"' if i==stage else '')+availability+f'><span class="adm-step-number">{"✓" if i<stage else i}</span><div><strong>Tahap {i}: {title}</strong><small>{escape(description)}</small></div></div>')
     st.html('<section class="adm-stepper" aria-label="Tahapan unggah dan validasi">'+''.join(items)+'</section>')
 
 

@@ -1,0 +1,39 @@
+/* Shared authenticated-workspace tokens. Referensi desain UI; never login. */
+body:has(.st-key-executive_sidebar,.bmt-page-loading,.st-key-admin_shell) {
+  /* Primitive → semantic → component; category/status palettes stay separate. */
+  --palette-white:#ffffff; --palette-paper:#f5f7f5; --palette-ink:#18241c;
+  --palette-muted:#526157; --palette-line:#dfe6df;
+  --palette-forest:#134e2a; --palette-green:#1f4e24;
+  --ws-surface:var(--palette-white); --ws-canvas:var(--palette-paper);
+  --ws-text:var(--palette-ink); --ws-muted:var(--palette-muted);
+  --ws-border:var(--palette-line); --ws-line-soft:#e9eeea;
+  --ws-soft:#f8faf8; --ws-hover:#edf2ed; --ws-primary:var(--palette-green);
+  --ws-forest:var(--palette-forest); --ws-primary-hover:#153e20;
+  --ws-focus:#0f766e; --ws-positive:#047857; --ws-font:BmtExecutiveInter,Inter,sans-serif;
+  --ws-space-4:16px; --ws-space-6:24px;
+  --ws-panel-radius:12px; --ws-control-radius:8px;
+  --ws-panel-shadow:none;
+}
+.st-key-executive_home button[kind="primary"],.st-key-admin_page button[kind="primary"] {
+  background:var(--ws-primary); color:var(--ws-surface); border-color:var(--ws-primary);
+}
+.st-key-executive_home input::placeholder,.st-key-executive_home textarea::placeholder,
+.st-key-admin_page input::placeholder,.st-key-admin_page textarea::placeholder,
+.st-key-executive_sidebar input::placeholder {
+  color:var(--ws-muted); opacity:1;
+}
+.st-key-executive_home [data-testid="stCaptionContainer"],
+.st-key-admin_page [data-testid="stCaptionContainer"],
+body:has(.st-key-admin_shell,.st-key-executive_sidebar) [data-testid="stDialog"] [data-testid="stCaptionContainer"] {
+  opacity:1;
+}
+.st-key-executive_home button[kind="primary"]:hover:enabled,.st-key-admin_page button[kind="primary"]:hover:enabled {
+  background:var(--ws-primary-hover); border-color:var(--ws-primary-hover);
+}
+.st-key-executive_home :is(button,a,input,textarea,[role="combobox"],[tabindex="0"]):focus-visible,
+.st-key-admin_page :is(button,a,input,textarea,[role="combobox"],[tabindex="0"]):focus-visible,
+.st-key-executive_sidebar :is(button,a,input):focus-visible,
+.st-key-admin_shell :is(button,a):focus-visible,
+.st-key-ah_detail :is(button,a,[tabindex="0"]):focus-visible {
+  outline:3px solid var(--ws-focus); outline-offset:3px;
+}

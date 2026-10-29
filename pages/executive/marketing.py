@@ -1,9 +1,10 @@
-from src.ui.assets import asset_text
+from src.ui.shared.assets import asset_text
 import streamlit as st
 from src.auth.ui import page_guard,protected_action
 from src.auth.actions import read_marketing_portfolio
-from src.ui.executive import ROOT,FILTER_KEYS,load_styles,header,dimension_filter
-from src.ui.marketing import initialize,reset_marketing,render_marketing
+from src.ui.shared.paths import ROOT
+from src.ui.executive.layout import FILTER_KEYS, load_styles, header, dimension_filter
+from src.ui.executive.marketing import initialize,reset_marketing,render_marketing
 
 principal=page_guard('executive')
 initialize()

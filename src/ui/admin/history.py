@@ -3,9 +3,10 @@ from datetime import timedelta
 from html import escape
 import json
 import streamlit as st
-from src.ui.executive import ROOT, number
-from src.ui.assets import asset_text
-from src.ui import admin
+from src.ui.shared.paths import ROOT
+from src.ui.shared.formatters import number
+from src.ui.shared.assets import asset_text
+from src.ui.admin import layout as admin
 from src.auth.admin_actions import read_admin_history, read_admin_history_detail
 from src.auth.ui import page_guard
 
@@ -161,7 +162,7 @@ def render():
     with st.container(key='admin_page'),st.container(key='admin_history_page'):
         left,right=st.columns([4,1.65],vertical_alignment='top')
         with left:st.html('<header class="adm-header"><div><div class="adm-breadcrumb">Admin / Riwayat Unggahan</div><h1>Riwayat Unggahan</h1><p>Telusuri hasil pemeriksaan, penerbitan, dan sumber data dashboard.</p></div></header>')
-        with right,st.container(key='ah_new_upload'):st.page_link(ROOT/'pages/admin_upload.py',label='Unggah Data Baru',icon=':material/add:')
+        with right,st.container(key='ah_new_upload'):st.page_link(ROOT/'pages/admin/upload.py',label='Unggah Data Baru',icon=':material/add:')
         top=st.container()
         filters()
         result=admin.call(read_admin_history,search=st.session_state['ah_search'],kind=st.session_state['ah_kind'],status=st.session_state['ah_status'],sort=st.session_state['ah_sort'],page=st.session_state['ah_page'],page_size=st.session_state['ah_size'])

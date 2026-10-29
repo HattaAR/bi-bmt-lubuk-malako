@@ -2,12 +2,13 @@ import streamlit as st
 
 from src.auth.actions import read_executive_kpis
 from src.auth.ui import page_guard, protected_action
-from src.ui.executive import FILTER_KEYS, filters, header, load_styles
-from src.ui.portfolio_quality import render_quality
+from src.ui.executive.layout import FILTER_KEYS, filters, header, load_styles
+from src.ui.executive.portfolio_quality import render_quality,load_quality_styles
 
 principal = page_guard('executive')
+load_quality_styles()
 # Shared shell key intentionally retains the verified native sidebar/layout behavior.
-with st.container(key='executive_home'), st.container(key='executive_quality'):
+with st.container(key='executive_home'), st.container(key='executive_quality'), st.container(key='quality_redesign',gap=None):
     result = protected_action(read_executive_kpis,
                               marketing_id=st.session_state.get(FILTER_KEYS[0]),
                               sector_id=st.session_state.get(FILTER_KEYS[1]), include_context=True)

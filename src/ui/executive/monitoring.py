@@ -1,7 +1,9 @@
 """Native monitoring controls and scoped table/detail from referensi desain UI."""
 from html import escape
 import streamlit as st
-from src.ui.executive import ROOT, FILTER_KEYS, CATEGORIES, dimension_filter, reset_filters, number, rupiah
+from src.ui.shared.paths import ROOT
+from src.ui.executive.layout import FILTER_KEYS, CATEGORIES, dimension_filter, reset_filters
+from src.ui.shared.formatters import number, rupiah
 from src.auth.ui import page_guard
 
 SCOPES={'Perlu Ditinjau':'review','Semua Pembiayaan':'all'}
@@ -43,7 +45,7 @@ def open_group_monitoring(raw, scope):
     st.session_state[FILTER_KEYS[1]]=sector
     st.session_state['monitor_scope']='Semua Pembiayaan'
     st.session_state['monitor_expected_publication']=scope['publication_id']
-    st.switch_page(ROOT/'pages/executive_monitoring.py')
+    st.switch_page(ROOT/'pages/executive/monitoring.py')
     return True
 
 
@@ -159,6 +161,6 @@ def detail_dialog(result):
         with st.expander('Skor model & konteks sumber'):
             st.write('Skor model, penugasan, dan riwayat tindak lanjut belum tersedia. Simulasi pokok tersedia terpisah tanpa mengubah kontrak.')
             st.caption(f'Publikasi {result["publication"]["publication_id"]} · Dataset {result["publication"]["dataset_version_id"]} · Sheet {row["source_sheet"]} · Baris sumber {row["source_row_number"]}')
-        from src.ui.simulation import open_from_monitoring
+        from src.ui.executive.simulation import open_from_monitoring
         st.button('Simulasikan Pokok',on_click=open_from_monitoring,args=(result,),icon=':material/calendar_month:')
     if st.button('Kembali ke daftar',on_click=close_detail):st.rerun()

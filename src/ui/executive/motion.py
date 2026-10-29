@@ -4,9 +4,9 @@ from html import escape
 import json
 from pathlib import Path
 import streamlit as st
-from src.ui.assets import asset_text
+from src.ui.shared.assets import asset_text
 
-ASSETS=Path(__file__).resolve().parents[2]/'assets'
+from src.ui.shared.paths import ASSETS
 
 
 def percent_markup(value,final):
@@ -27,7 +27,7 @@ def motion_scope(result):
 
 
 def scope_attributes(result,page):
-    from src.ui.page_runtime import current_route
+    from src.ui.executive.page_runtime import current_route
     route=current_route()
     route_attribute='' if route is None else f' data-bmt-route="{escape(route,quote=True)}"'
     return f'data-bmt-snapshot="{motion_scope(result)}" data-bmt-page="{escape(page,quote=True)}"'+route_attribute

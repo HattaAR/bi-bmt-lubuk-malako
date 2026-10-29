@@ -3,9 +3,10 @@ from html import escape
 from datetime import date
 import streamlit as st
 from src.auth.ui import page_guard
-from src.ui.executive import ROOT,number,rupiah,percent
-from src.ui.monitoring import badge
-from src.ui.motion import scope_attributes
+from src.ui.shared.paths import ROOT
+from src.ui.shared.formatters import number, rupiah, percent
+from src.ui.executive.monitoring import badge
+from src.ui.executive.motion import scope_attributes
 
 DEFAULTS=dict(sim_code=None,sim_search='',sim_expected_publication=None,sim_months=12,sim_month_slider=12,sim_start=None,sim_result=None)
 
@@ -42,7 +43,7 @@ def open_from_monitoring(result):
     for key,value in DEFAULTS.items():st.session_state[key]=value
     st.session_state['sim_code']=result['detail']['financing_code']
     st.session_state['sim_expected_publication']=result['publication']['publication_id']
-    st.switch_page(ROOT/'pages/executive_simulation.py')
+    st.switch_page(ROOT/'pages/executive/simulation.py')
 
 
 def contract_html(row):
