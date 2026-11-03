@@ -3,7 +3,7 @@ from collections import Counter
 import json
 from src.database.connection import get_connection
 from src.database.active_kpis import _percentage
-from src.etl.historical import VERSION
+from src.etl.historical import READABLE_VERSIONS
 
 DURATIONS={'90':'≤ 90 hari','180':'91–180 hari','365':'181–365 hari','gt365':'> 365 hari'}
 NOMINALS={'mikro':'< Rp10.000.000','menengah':'Rp10.000.000–Rp50.000.000','tinggi':'> Rp50.000.000'}
@@ -61,7 +61,7 @@ def get_historical_summary(*,year=None,duration=None,nominal=None,connection_fac
                 LEFT JOIN dataset_versions d USING(dataset_version_id) WHERE cp.dataset_kind=%s''',('historical',))
             publication=cursor.fetchone()
             if not publication:return dict(publication=None,status='no_publication',filters=dict(year=year,duration=duration,nominal=nominal))
-            if publication['dataset_kind']!='historical' or publication['status']!='published' or publication['validation_rule_version']!=VERSION:raise ValueError('Pointer historis tidak konsisten.')
+            if publication['dataset_kind']!='historical' or publication['status']!='published' or publication['validation_rule_version'] not in READABLE_VERSIONS:raise ValueError('Pointer historis tidak konsisten.')
             cursor.execute('''SELECT realization_date,original_principal,contract_duration_days,eligible,target_late,
                 completion_delay_days,date_issues FROM fact_pembiayaan_historis WHERE dataset_version_id=%s''',(publication['dataset_version_id'],))
             result=aggregate_historical(list(cursor.fetchall()),year=year,duration=duration,nominal=nominal)
